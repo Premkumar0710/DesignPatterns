@@ -1,0 +1,63 @@
+How to implement SingleTon ?
+
+    class DbConnection{
+        String url
+        String userName
+        String password
+        List<TCPConnection> pools
+    }
+
+    Is this class Singleton ? Absolutely Not
+
+    DbConnection db1 = new DbConnection();
+    DbConnection db2 = new DbConnection();
+
+    See we can create two objects here. Till the time we have constructors we cannot restrict object creation.
+
+    Is there any way to remove constructor ? No java anyway provides default constructor if we don't explicitly define one.
+    We can make constructor as private right ? Yes, we can
+
+    class DbConnection{
+            String url
+            String userName
+            String password
+            List<TCPConnection> pools
+
+            private DbConnection(){}
+        }
+    DbConnection db1 = new DbConnection();
+
+    Will this object gets created ? No since constructor is private we can't even create one object.
+    The thing is we should restrict ourselves to create only one object.
+
+    Note : private makes accessible only inside the class itself.
+
+    Now we are introducing new static method to create object inside the class itself to invoke constructor since we made it private
+
+    public static DbConnection createInstance(){
+         return new DbConnection();
+    }
+
+    Now it becomes singleton ? No
+    DbConnection db1 = DbConnection.createInstance();
+    DbConnection db2 = DbConnection.createInstance();
+
+    Now we need to introduce a static variable & null checks
+
+    Class DbConnection{
+        public static DbConnection instance = null;
+
+        private DbConnection(){}
+
+        public static DbConnection createInstance(){
+            if(instance == null){ return new DbConnection(); }
+            return instance;
+         }
+    }
+
+    Now its a singleton class.
+
+    Steps
+    1. Make the constructor as private
+    2. Create a static method to create an instance
+    3. Add null check inside the static method

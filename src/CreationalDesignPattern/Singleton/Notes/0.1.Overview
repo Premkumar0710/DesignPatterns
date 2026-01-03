@@ -1,0 +1,44 @@
+1. What is a singleton Pattern ?
+- It always allows us to create a class for which only one object will be created.
+- Creation of object is very expensive.
+- Lets say if we have multiple incoming requests & if it creates object for each requests, then the system will be slowed down.
+
+- Singleton are always immutable.
+  db.userName = "Vishal" ,
+  it can be used in mutiple places, if strings are mutable then if we change in one place all other places would be changed as well.
+
+
+2. Why / Where Singleton ?
+- Can be used where we have shared resources
+- When object creation is expensive.
+- Wherever it makes common sense
+
+
+Example :
+
+i) Db Connection
+class DbConnection{
+    - url
+    - userName
+    - password
+    - List<TCPConnection> pools
+}
+
+DbConnection dbConnection; (Reference of the object)
+- It can be used for orderService, productService etc..
+- It has same attributes for all the use cases
+- Is it good to use different objects for each use case ? Not at all.
+
+ii) Logger
+- Its a library to print information on command line (We print logs that's happening in our apps)
+- Every class will require logging
+- Do we really need multiple objects for logging info ? A big no.
+
+
+3. Pros of Singleton :
+- Provides resource efficiency
+- It's like a caching of objects where object creation is expensive
+
+4. Cons of Singleton :
+- It makes the testing difficult
+

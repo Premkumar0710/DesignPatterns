@@ -1,0 +1,28 @@
+1. Eager loading :
+
+public static DbConnection createInstance(){
+       if(instance == null){ return new DbConnection(); }
+       return instance;
+}
+
+In the above code, we have if(instance == null), if multiple threads pass on to that condition at the same time before creating object , it will pass null check & creates additional objects which is against singleton rule.
+we can sort this by eager loading
+
+private static DbConnection dbc = new DbConnection(), while compiling itself object will be created. Refer DbConnectionEagerLoading codebase
+
+Cons :
+- Application start time will increase if we use eager loading
+- But here we can't pass any arguments.
+
+2. Using Synchronized keyword:
+
+Cons :
+- What if it has already created object , when next thread goes it locks the code again ; null checks & rejects
+- Slows down the entire process.
+
+We need to lock only the critical section for better performance.
+
+3. Using Double checked locking :
+- Proper way of implementing Singleton without any issues.
+- We are introducing double checked locking to make sure not more than 1 thread enters critical section
+- Refer DbConnectionLock class

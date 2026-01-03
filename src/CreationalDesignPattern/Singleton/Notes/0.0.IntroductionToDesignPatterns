@@ -1,0 +1,39 @@
+DESIGN PATTERNS - INTRODUCTION
+
+1. What is a Design Pattern ?
+- Well established solutions to common software Design Problems
+- It's derived from a book called Gang of Four
+- It has 23 Design Patterns
+- Out of 23, 10 Design Patterns are most frequently occurring
+
+2. Why Design Pattern ?
+- It gave developers a shared Vocabulary
+- Lets say we have a problem & the other one says use builder. So as soon as he hears the word builder he should understand what has to be done
+- Saves lot of time for famous problems, since its provides standard solution
+- These are heavily asked in interviews as well
+
+3. Types of Design Pattern
+
+Based on how objects are created, we have 3 categories :
+
+i) Creational Design Pattern
+- How will an object be created ?
+- How many objects will be created ?
+
+ii) Structural Design Pattern
+Before creating objects, we need classes right ?
+
+- How your classes will be structured ?
+- What attributes will be there in the class ?
+- How will a class interact with other classes ?
+
+iii) Behavioural Design Pattern
+- How you will code a particular action ?
+
+4. Deep Dive
+
+i) Creational Design Pattern
+    - Singleton
+    - Builder
+    - Factory (Simple factory, factory method, abstract factory)
+    - Prototype
