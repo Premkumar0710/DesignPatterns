@@ -1,0 +1,40 @@
+WHAT WE WANT ?
+- Allows different values each recognized by different name (similar to map solution)
+- Compile time check on keys
+- Compile time check on data type of values
+
+Solution is to create a class & get rid of these issues.
+
+class Helper{
+    String name;
+    String univ_name;
+    int age;
+    double percentage;
+}
+
+Student(Helper helper){
+    this.name = helper.name;
+    this.age = helper.age;
+    ....
+    ....
+}
+
+All the problems we faced in map is sorted now.
+
+What all attributes will helper have ? -> exact attributes of student class
+Helper helper = new Helper();
+helper.setAge(30);
+helper.setName("abc");
+
+Student s = new Student(helper);
+
+Student(Helper helper){
+  if(helper.age>20){ throw new Exception(); }
+  this.age = helper.age;
+}
+
+helper is nothing but a builder to help us derive the solution.
+This is Builder Design Pattern.
+
+Note :
+Go through Traditional Approach & then Production Ready Approach

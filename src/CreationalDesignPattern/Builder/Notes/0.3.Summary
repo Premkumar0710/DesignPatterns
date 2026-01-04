@@ -1,0 +1,7 @@
+WHEN TO USE BUILDER ?
+- Whenever we have class with lot of attributes
+- When we need to validate the attributes before object creation
+- Immutable (All the params needs to be passed at the time of object creation)
+
+SUMMARY
+- Student -> getBuilder -> Builder -> setId , setName etc.. (returns builder) -> build(which returns Student)

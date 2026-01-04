@@ -1,0 +1,89 @@
+PROBLEM STATEMENT
+
+1. A class with lot of attributes
+
+class student{
+   id,
+   name,
+   age,
+   email,
+   mobile,
+   percentage,
+   class,
+   section,
+   Univ_name,
+   grad_yr
+}
+
+to create a object of this class,
+Student s = new Student();
+s.setId(1) etc.....
+
+2. We want to validate a particular object before creating the actual object
+
+- email should be a valid one
+- id shouldn't be empty/null
+- No students should have grad_yr > 2023
+
+Using the above used object creation (in ist problem), we wouldn't be able to satisfy the condition discussed over here.
+
+Solution 1 :
+
+- What's the one thing that allows us to create an object ? -> Constructor
+- Shall we have validation inside constructor itself ?
+public student(id,name,age,email,mobile,class,section,Univ_name,grad_yr){
+        // validation checks
+}
+
+client.java
+
+psvm(){
+    Student s = new Student(1,"Prem",26,"mp***@gmail.com","80*******34",12,A,"PyUniv",2032);
+}
+
+If we give any unwanted data, we can stop creating the objects as per earlier discussion by adding validation checks.
+But did we solve entire problem ? -> No
+
+Cons :
+- Code is difficult to understand since it has huge attributes; we can't compare it with student class all the time
+- Prone to errors while passing the values
+- In some university, section will be assigned based on the performance in the admission test. So we can't decide the section directly
+
+Solution 2 :
+
+- Instead of having one big constructor, we can have multiple small constructors (Constructor overloading)
+- Initially student will be onboarded with
+    Student(name,percentage)
+    Student(name,age)
+    Student(name,email,mobile)
+
+Cons:
+- How many constructors would you create if you have n attributes ? for 10 attr 10^n -> 1024 constructors (Constructor explosion)
+- Lets say we have student(id,name) & student(id,email). If we pass a param with int & string, to which constructor it goes. Can we have same signature for 2 constructors ? Hell No.
+  We can't be able to code all the possible combinations
+
+Solution 3 :
+
+- Instead of passing multiple params, we can opt map
+   name : Prem
+   age : 26
+- Multiple constructor problem is solved
+
+Client.java
+
+psvm(){
+    Map<String,Object> studentMap = new HashMap<>();
+    studentMap.put("Name","Prem");
+    studentMap.put("age",27);
+    Student s = new Student(studentMap);
+}
+
+Student (Map<String,Object> student){
+  // validation checks
+  this.age = (int) map.get("age"); // we need to typecast it since we used object in the value part in map
+}
+
+Cons :
+- What if i write studentMap.put("percentage","hello") , since its object whatever we give, it accepts. It won't throw an error in Compile time
+  We should minimize Run time exceptions
+- What if client gives map.put("nama","Prem") -> Typo

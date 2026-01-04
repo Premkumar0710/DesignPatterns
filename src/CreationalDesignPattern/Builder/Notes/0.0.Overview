@@ -1,0 +1,5 @@
+BUILDER DESIGN PATTERN
+- It's a Creational Design Pattern
+- Used to construct a complex object step by step
+- Useful when object has lot of attributes
+- Ensure that the object is created with proper validation checks
