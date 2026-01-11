@@ -1,0 +1,36 @@
+PROTOTYPE DESIGN PATTERN
+- Basic layout of the object that we wish to create
+- Template sort of thing
+
+Let's take an example of classmate notebook
+It's famous because of its fun fact & front page design
+
+lets assume we are working in classmate factory..
+
+class Notebook {
+- NoOfPages
+- price
+- type (Ruled , unruled)
+
+- height
+- width
+- front page design
+- fun facts
+}
+
+classmate wants to create 10000 notes of A4 size each having 120 pages that are ruled.
+For all these 10,000 notes only fun facts & design will differ. Rest all will be same
+
+In this case, classmate will be creating a prototype right ?
+
+A4_120_ruled
+- pages : 120
+- price : 100
+- type : ruled
+- height : 60mm
+- width : 40 mm
+- fun facts : null
+- design : null
+
+Now how classmate factory will work ?
+- It will create a copy of prototype & add the value of front page design + fun facts

@@ -1,0 +1,6 @@
+Definition :
+Help us to solve problems where we need to create a copy of given object
+
+Problem Statement :
+- Given a particular class, we need to create a copy of that particular object
+- Here copy means creating a new object with exact same attributes (which means cloning in different address)

@@ -1,0 +1,61 @@
+class student{
+    String name;
+    int age;
+    String gender;
+    Double avgPercentOfBatch;
+    String batchName;
+    String batchInstructor;
+}
+
+
+Student s = new Student();
+
+s.name = "Prem";
+s.age = 26;
+s.gender = "male";
+s.avgPercentOfBatch = 82.0;
+s.batchName = "firstBatch";
+s.batchInstructor = "Vishal"
+
+Here batchName, batchInstructor & avgPercentOfBatch are common. So we can create a prototype with these common attributes
+
+
+Student prototype = new Student();
+
+prototype.avgPercentOfBatch = 82.0;
+prototype.batchName = "firstBatch";
+prototype.batchInstructor = "Vishal"
+
+we can modify other attributes
+
+So, we need to store these common attributes, where to store it ? In Regsitry.
+Let's have a look
+
+class Registry{
+    Map<K,V> map;
+    getPrototype(key){
+        map.get(..);
+    }
+
+    store(key,value){
+        map.put(...);
+    }
+}
+
+Registry.store("Morning",Prototype);
+Registry.get("Morning");
+
+The best Data structure that we can use over here is Hashmap.
+
+STEPS :
+1. Copy() / clone() (We need to take care of child classes)
+2. We have to store the prototype into the registry
+3. Client can call the registry; then get the prototype ; modify it as per the requirement
+
+- Normally, prototypes are created/stored at application start time. (its stored in RAM, not in disk.)
+- Only one object of Registry is enough here. So, Registry is Singleton
+
+SPRING EXAMPLE :
+@Bean, @Service, @Component -> When we use these annotations, spring creates a bean for me, when i require it again spring gives it for me.
+Spring creates objects in application context (i.e Spring registers the beans).
+Beans are nothing but prototype

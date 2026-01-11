@@ -1,0 +1,109 @@
+Brute force way :
+
+class Student{
+- name
+- age
+- gender
+
+}
+
+client.java
+class client{
+    psvm(){
+
+    Student os = new Student();
+    Student cs = new Student();
+    cs.age = os.age;
+    cs.name = os.name
+    ...........
+    }
+ }
+
+** Here os -> original student & cs -> copy student
+
+Cons :
+- Client should have knowledge of all the attr of student class. If 2 classes know about each other very well then it would be tightly coupled (sort of 100% dependency)
+  Extensibility issue will arise here.
+- If student attr have any private variables, the client won't be able to set them
+- What if the main class has child class initialisation
+    Student os = new IntelligentStudent();
+    IS cs = new IS();
+    cs.iq = os.iq;
+
+    if(os instanceOf IS){ cs = new IntelligentStudent(); }
+    else if (os instanceOf Student) { cs = new Student(); }
+
+    It violates SRP & OCP
+
+Now lets try with Copy constructors
+
+class Student{
+..
+
+ Student(Student o){
+ .........
+ .........
+ }
+}
+
+class client{
+    psvm(){
+
+    Student os = new IS();
+    Student cs = new Student(os);
+    }
+}
+
+Issues :
+- With this approach you can copy only parent attributes in case of child initialisation. Child specific attributes won't be copied
+  So for that we need to call IS constructor. to check that we need to use instanceOf again.. (SRP & OCP Violation)
+
+Lets try some other approaches
+
+client
+obj.copy() ---->     copy()
+
+class student{
+ ....
+ ....
+    copy(){
+    Student s = new Student();
+    s.name = this.name;
+    s.age = this.age;
+    ....
+    return s;
+    }
+}
+
+class IS{
+
+    copy(){
+    Is is = new IS();
+    is.iq = this.iq;
+    ......
+    return is;
+    }
+
+
+Student os = new Student();
+Student cs = os.copy(); // calls parent copy method
+
+All the issues discussed above is sorted, now lets try the same with child class
+
+Student os = new IS();
+Student cs = os.copy(); // calls Child copy method
+
+Again child copy will be created & its return type is also IS, IS can have parent reference.
+What if developers forget to implement copy() inside IS. Anyway its getting extended, but we need override child attributes right ?
+
+Lets see few other options :
+- If we make parent method as abstract to make child implement it, then we can't create object out of it since we need to make class also as abstract.
+
+- How come we create a interface copyable & add copy() inside it. Both parent & child have to implement it.
+  Ideally copy() is coming from parent class, even though i forgot to implement, its kind of enforced already since it comes from parent.
+
+So, both of the above options won't work for the issue that we face.
+
+
+UNFORTUNATELY !! There is no solution to it in Java.
+This is the responsibility of the developer to ensure that all the child classes override copy() method.

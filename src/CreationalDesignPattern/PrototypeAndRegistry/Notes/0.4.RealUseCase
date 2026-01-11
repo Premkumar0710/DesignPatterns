@@ -1,0 +1,11 @@
+REAL TIME USE CASE
+
+1. Search queries (google search)
+
+SearchAPI s = new SAPI();
+s.url = doesn't change (google.com);
+s.token = doesn't change;
+s.query = changes;
+s.cache = depends;
+
+create a new copy & change whatever you want to as we don't want to create an object from scratch again
